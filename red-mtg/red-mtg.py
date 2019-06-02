@@ -42,6 +42,6 @@ class RedMtg:
         return True
 
 def setup(bot):
-    n = red-mtg(bot)
+    n = RedMtg(bot)
     bot.add_listener(n.listener, "on_message")
     bot.add_cog(n)
