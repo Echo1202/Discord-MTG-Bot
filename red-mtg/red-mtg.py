@@ -1,5 +1,5 @@
 import discord
-from .utils.dataIO_import_dataIO
+from .utils.dataIO import dataIO
 from __main__ import settings
 import requests
 
