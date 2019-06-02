@@ -1,7 +1,7 @@
 {
   "AUTHOR" : "EC",
   "INSTALL_MSG" : "INSTALLED red-mtg.py",
-  "NAME" : "EC-MTG",
+  "NAME" : "red-mtg",
   "SHORT" : "stuff",
   "DESCRIPTION" : "stuff",
   "TAGS" : ["stuff", "stuffs"]
