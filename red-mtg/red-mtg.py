@@ -18,6 +18,7 @@ class RedMtg:
             url += name
             my_header = {'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
             card_data = requests.get(url, headers=my_header, allow_redirects=True).json()
+            print(url)
             try:
                 embed_obj = self.key_display(key,card_data)
                 await self.bot.send_message(message.channel, embed=embed_obj)
@@ -29,21 +30,22 @@ class RedMtg:
         if self.string_find(msg_lower, "[[") and self.string_find(msg_lower, "]]"):
             name = msg_lower[msg_lower.find("[[") + 2:msg_lower.find("]]")]
             if self.string_find(name, "$"):
-                name = name[name.find("$") + 1:]
+                name = name[name.find("$")+1:]
                 return "$", name
             elif self.string_find(name, "!"):
-                name = name[name.find("!") + 1:]
+                name = name[name.find("!")+1:]
                 return "!", name
             elif self.string_find(name, "?"):
-                name = name[name.find("?") + 1:]
+                name = name[name.find("?")+1:]
                 return "?", name
             else:
                 return "0", name
 
     def key_display(self,key,card_data):
+        print(key)
         if key == "$":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
-            embed_obj = discord.Embed(title="Price of " + card_data["name"], url=link, description=card_data["set"] + " $" + card_data["prices"]["usd"])
+            embed_obj = discord.Embed(title="Price of "+card_data["name"], url=link, description=card_data["set"]+" $" + card_data["prices"]["usd"])
             return embed_obj
         elif key == "!":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
@@ -52,13 +54,13 @@ class RedMtg:
             return embed_obj
         elif key == "?":
             ruling_link = card_data["rulings_uri"]
-            embed_obj = discord.Embed(title="Ruling for " + card_data["name"], url=ruling_link)
+            embed_obj = discord.Embed(title="Ruling for "+card_data["name"], url=ruling_link)
             for line in card_data:
                 embed_obj.add_field(name=card_data["published_at"], value=card_data["comment"], inline=False)
             return embed_obj
         elif key == "0":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
-            embed_obj = discord.Embed(title=card_data["name"], url=link, description=card_data["oracle_text"] + card_data["mana_cost"])
+            embed_obj = discord.Embed(title=card_data["name"], url=link, description=card_data["oracle_text"]+card_data["mana_cost"])
             embed_obj.add_field(name="type_line")
             embed_obj.set_thumbnail(url=card_data["image_uris"]["png"])
             return embed_obj
