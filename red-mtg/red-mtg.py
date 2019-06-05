@@ -19,8 +19,8 @@ class RedMtg:
             my_header = {'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
             card_data = requests.get(url, headers=my_header, allow_redirects=True).json()
             print(url)
+            embed_obj = self.key_display(key, card_data)
             try:
-                embed_obj = self.key_display(key,card_data)
                 await self.bot.send_message(message.channel, embed=embed_obj)
             except discord.Forbidden:
                 return
