@@ -42,7 +42,6 @@ class RedMtg:
                 return "0", name
 
     def key_display(self,key,card_data):
-        print(key)
         if key == "$":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
             embed_obj = discord.Embed(title="Price of "+card_data["name"], url=link, description=card_data["set"]+" $" + card_data["prices"]["usd"])
@@ -60,6 +59,7 @@ class RedMtg:
             return embed_obj
         elif key == "0":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
+            print(key)
             embed_obj = discord.Embed(title=card_data["name"], url=link, description=card_data["oracle_text"])
             embed_obj.add_field(name="type_line")
             embed_obj.set_thumbnail(url=card_data["image_uris"]["png"])
