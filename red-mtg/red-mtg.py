@@ -36,13 +36,13 @@ class RedMtg:
             # parse the message
             name = msg_lower[msg_lower.find("[[") + 2:msg_lower.find("]]")]
             if self.string_find(name, "$"):
-                name = name[name.find("$") + 1]
+                name = name[name.find("$") + 1:]
                 return "$", name
             if self.string_find(name, "!"):
-                name = name[name.find("!" + 1)]
+                name = name[name.find("!") + 1:]
                 return "!", name
             if self.string_find(name, "?"):
-                name = name[name.find("?" + 1)]
+                name = name[name.find("?") + 1:]
                 return "?", name
             else:
                 return "0", name
