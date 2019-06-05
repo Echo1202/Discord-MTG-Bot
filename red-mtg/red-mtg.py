@@ -16,9 +16,10 @@ class RedMtg:
             key, name = self.message_find(message)
             url = "https://api.scryfall.com/cards/named?fuzzy="
             url += name
-
+            my_header = {'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
+            card_data = requests.get(url, headers=my_header, allow_redirects=True).json()
             try:
-                embed_obj = self.key_display(key,url)
+                embed_obj = self.key_display(key,card_data)
                 await self.bot.send_message(message.channel, embed=embed_obj)
             except discord.Forbidden:
                 return
@@ -26,23 +27,20 @@ class RedMtg:
     def message_find(self, message):
         msg_lower = message.content.lower()
         if self.string_find(msg_lower, "[[") and self.string_find(msg_lower, "]]"):
-            # parse the message
             name = msg_lower[msg_lower.find("[[") + 2:msg_lower.find("]]")]
             if self.string_find(name, "$"):
                 name = name[name.find("$") + 1:]
                 return "$", name
-            if self.string_find(name, "!"):
+            elif self.string_find(name, "!"):
                 name = name[name.find("!") + 1:]
                 return "!", name
-            if self.string_find(name, "?"):
+            elif self.string_find(name, "?"):
                 name = name[name.find("?") + 1:]
                 return "?", name
             else:
                 return "0", name
 
-    def key_display(self,key,url):
-        my_header = {'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
-        card_data = requests.get(url, headers=my_header, allow_redirects=True).json()
+    def key_display(self,key,card_data):
         if key == "$":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
             embed_obj = discord.Embed(title="Price of " + card_data["name"], url=link, description=card_data["set"] + " $" + card_data["prices"]["usd"])
