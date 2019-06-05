@@ -51,8 +51,9 @@ class RedMtg:
             embed_obj.set_image(url=card_data["image_uris"]["normal"])
             return embed_obj
         elif key == "?":
+            link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
             rulings_url = card_data["rulings_uri"]
-            embed_obj = discord.Embed(title="Ruling for "+card_data["name"], url=rulings_url)
+            embed_obj = discord.Embed(title="Ruling for "+card_data["name"], url=link, description="")
             my_header = {'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
             card_data = requests.get(rulings_url, headers=my_header, allow_redirects=True).json()
             embed_obj.add_field(name=card_data["published_at"], value=card_data["comment"], inline=False)
