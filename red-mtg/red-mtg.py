@@ -59,8 +59,8 @@ class RedMtg:
             return embed_obj
         elif key == "0":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
-            embed_obj = discord.Embed(title=card_data["name"], url=link, description=card_data["oracle_text"])
-            embed_obj.add_field(name=card_data["type_line"])
+            embed_obj = discord.Embed(title=card_data["name"], url=link, description=card_data["mana_cost"])
+            embed_obj.add_field(name=card_data["type_line"], value=card_data["oracle_text"], inline=False)
             embed_obj.set_thumbnail(url=card_data["image_uris"]["png"])
             return embed_obj
         else:
