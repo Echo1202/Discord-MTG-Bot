@@ -17,16 +17,16 @@ class RedMtg:
             url = 'https://api.scryfall.com/cards/named?fuzzy='
             url += name
 
-            #try: # throws exceptions
+            try:
                 #link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
                 #embed_obj = discord.Embed(title=card_data["name"], url=link, description=card_data["oracle_text"] + card_data["mana_cost"])
                 #embed_obj.add_field(name = "type_line")
                 #embed_obj.set_thumbnail(url=card_data["image_uris"]["png"])
                 #await self.bot.send_message(message.channel, embed=embed_obj)
-            #except discord.Forbidden:
+                #except discord.Forbidden:
                 #return
-            embed_obj=self.key_display(key,url)
-            await self.bot.send_message(message.channel, embed=embed_obj)
+                embed_obj=self.key_display(key,url)
+                await self.bot.send_message(message.channel, embed=embed_obj)
             except discord.Forbidden:
                 return
 
