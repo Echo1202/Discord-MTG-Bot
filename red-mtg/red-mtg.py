@@ -25,7 +25,7 @@ class RedMtg:
                 #await self.bot.send_message(message.channel, embed=embed_obj)
             #except discord.Forbidden:
                 #return
-            embed_obj=self.key_display(key,name)
+            embed_obj=self.key_display(key,url)
             await self.bot.send_message(message.channel, embed=embed_obj)
             except discord.Forbidden:
                 return
@@ -47,10 +47,11 @@ class RedMtg:
             else:
                 return "0", name
 
-    def key_display(self,key,name):
-        my_header = {'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
+    def key_display(self,key,url):
+        my_header = {
+            'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
         # using the name get the json for the page (json is now a dict(?))
-        card_data = requests.get(name, headers=my_header, allow_redirects=True).json()
+        card_data = requests.get(url, headers=my_header, allow_redirects=True).json()
         if key == "$":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
             embed_obj = discord.Embed(title="Price of " + card_data["name"], url=link, description=card_data["set"] + " $" + card_data["prices"]["usd"])
