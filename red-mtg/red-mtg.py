@@ -64,6 +64,8 @@ class RedMtg:
             embed_obj.add_field(name="type_line")
             embed_obj.set_thumbnail(url=card_data["image_uris"]["png"])
             return embed_obj
+        else:
+            return
 
     def string_find(self, content, word):
         i = content.find(word)
