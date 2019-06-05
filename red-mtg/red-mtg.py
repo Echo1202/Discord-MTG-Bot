@@ -14,7 +14,7 @@ class RedMtg:
         # restrict usage within a specific channel
         if channel == '372159261108600833':
             key,name = self.message_find(message)
-            url = 'https://api.scryfall.com/cards/named?fuzzy='
+            url = "https://api.scryfall.com/cards/named?fuzzy="
             url += name
 
             try:
