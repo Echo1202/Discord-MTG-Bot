@@ -50,7 +50,7 @@ class RedMtg:
         elif key == "!":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
             embed_obj = discord.Embed(title=card_data["name"], url=link)
-            embed_obj.set_thumbnail(url=card_data["image_uris"]["normal"])
+            embed_obj.set_image(url=card_data["image_uris"]["normal"])
             return embed_obj
         elif key == "?":
             ruling_link = card_data["rulings_uri"]
@@ -60,11 +60,12 @@ class RedMtg:
             return embed_obj
         elif key == "0":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
-            embed_obj = discord.Embed(title=card_data["name"], url=link, description=card_data["oracle_text"]+card_data["mana_cost"])
+            embed_obj = discord.Embed(title=card_data["name"], url=link, description=card_data["oracle_text"])
             embed_obj.add_field(name="type_line")
             embed_obj.set_thumbnail(url=card_data["image_uris"]["png"])
             return embed_obj
         else:
+            print("key display nothing")
             return
 
     def string_find(self, content, word):
