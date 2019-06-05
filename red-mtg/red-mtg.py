@@ -18,14 +18,7 @@ class RedMtg:
             url += name
 
             try:
-                #link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
-                #embed_obj = discord.Embed(title=card_data["name"], url=link, description=card_data["oracle_text"] + card_data["mana_cost"])
-                #embed_obj.add_field(name = "type_line")
-                #embed_obj.set_thumbnail(url=card_data["image_uris"]["png"])
-                #await self.bot.send_message(message.channel, embed=embed_obj)
-                #except discord.Forbidden:
-                #return
-                embed_obj=self.key_display(key,url)
+                embed_obj = self.key_display(key,url)
                 await self.bot.send_message(message.channel, embed=embed_obj)
             except discord.Forbidden:
                 return
@@ -49,7 +42,6 @@ class RedMtg:
 
     def key_display(self,key,url):
         my_header = {'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
-        # using the name get the json for the page (json is now a dict(?))
         card_data = requests.get(url, headers=my_header, allow_redirects=True).json()
         if key == "$":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
