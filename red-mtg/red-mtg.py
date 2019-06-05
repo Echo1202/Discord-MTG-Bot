@@ -48,8 +48,7 @@ class RedMtg:
                 return "0", name
 
     def key_display(self,key,url):
-        my_header = {
-            'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
+        my_header = {'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
         # using the name get the json for the page (json is now a dict(?))
         card_data = requests.get(url, headers=my_header, allow_redirects=True).json()
         if key == "$":
