@@ -56,10 +56,14 @@ class RedMtg:
             embed_obj = discord.Embed(title="Ruling for "+card_data["name"], url=link, description="")
             my_header = {'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"}
             rulings_data = requests.get(rulings_url, headers=my_header, allow_redirects=True).json()
+            counter = 0
             for temp in rulings_data["data"]:
                 temp_pub = temp["published_at"]
                 temp_comment = temp["comment"]
                 embed_obj.add_field(name=temp_pub, value=temp_comment, inline=False)
+                counter += 1
+            if counter == 0:
+                embed_obj.add_field(name="None", value="No Rulings Found", inline=False)
             return embed_obj
         elif key == "0":
             link = "https://scryfall.com/card/{}/{}".format(card_data["set"], card_data["collector_number"])
