@@ -1,2 +1,2 @@
 # summer-project
-# project working with Daniel Quach who introduced me to working with json files and servers
+# project working with json, Discord Bot API, and server requests
